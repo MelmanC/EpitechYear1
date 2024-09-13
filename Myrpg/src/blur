@@ -1,0 +1,27 @@
+uniform sampler2D src;
+uniform vec2 offset;
+
+void main()
+{
+	vec2 textCoord = gl_TexCoord[0].xy;
+	vec4 color = vec4(0.0);
+
+	color += texture2D(src, textCoord - 4.0 * offset) *
+	   0.0162162162;
+	color += texture2D(src, textCoord - 3.0 * offset) *
+	   0.0540540541;
+	color += texture2D(src, textCoord - 2.0 * offset) *
+	   0.1216216216;
+	color += texture2D(src, textCoord - offset) *
+	   0.1945945946;
+	color += texture2D(src, textCoord) * 0.2270270270;
+	color += texture2D(src, textCoord + offset) *
+	   0.1945945946;
+	color += texture2D(src, textCoord + 2.0 * offset) *
+	   0.1216216216;
+	color += texture2D(src, textCoord + 3.0 * offset) *
+	   0.0540540541;
+	color += texture2D(src, textCoord + 4.0 * offset) *
+	   0.0162162162;
+	gl_FragColor = color;
+}

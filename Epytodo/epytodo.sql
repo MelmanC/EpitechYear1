@@ -1,0 +1,23 @@
+CREATE DATABASE epytodo;
+
+USE epytodo;
+
+CREATE TABLE user (
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  email VARCHAR(320) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  firstname VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE todo (
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  title VARCHAR(255) NOT NULL,
+  description TEXT NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  due_time DATETIME NOT NULL,
+  user_id INT NOT NULL,
+  status ENUM('todo', 'in progress', 'done', 'not started') DEFAULT 'not started' NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES user(id)
+);
